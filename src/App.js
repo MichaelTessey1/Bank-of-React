@@ -102,8 +102,43 @@ class App extends Component {
     
   }
 
-  addDebit = () => {
+  addDebit = (event) => {
+    event.preventDefault();
+    //setting description and amount
+    let description = event.target[0].value;
+    let amount = Number(event.target[1].value);
 
+    //get date
+    const curr_date = new Date();
+    let date = curr_date.getFullYear() + "-" + curr_date.getMonth() + "-" + curr_date.getDate();
+
+    //generate random key for id
+    let result = "";
+    let characters = "abcdefghijklmnopqrstuvwxyz0123456789"
+    for (let i = 0; i < 36; i++) {
+      if(i === 8 || i === 13 || i === 18 || i ===23 ) {
+        result += '-'
+      }
+      else {
+        result += characters[Math.floor(Math.random() * 36)]
+      }
+    }
+
+    //create new object for debit array and add it to state and update accountBalance
+    let newDebit = {
+      'id': result,
+      'description': description,
+      'amount': amount,
+      'date': date
+    };
+
+    let updateAccountBalance = this.state.accountBalance;
+    updateAccountBalance -= amount;
+    
+    this.setState({
+      debits:[...this.state.debits, newDebit],
+      accountBalance: updateAccountBalance
+    })
   }
 
   // Create Routes and React elements to be rendered using React components

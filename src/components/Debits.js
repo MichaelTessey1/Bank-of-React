@@ -1,31 +1,30 @@
 // src/components/Debits.js
 import React from 'react'
 import {Link} from 'react-router-dom'
+import AccountBalance from './AccountBalance';
 
 const Debits = (props) => {
-  console.log("debit ", props)
-  // Create the list of Debit items
-	// let debitsView = () => {
-  //   const { debits } = props;
-  //   return debits.map((debit) => {
-  //     let date = debit.date.slice(0,10);
-  //     return <li key={debit.id}>{debit.amount} {debit.description} {date}</li>
-  //   }) 
-  // }
-  // Render the list of Debit items and a form to input new Debit item
+	let debitsView = () => {
+    const { debits } = props;
+    return debits.map((debit) => {
+      let date = debit.date.slice(0,10);
+      return <li key={debit.id}>{debit.amount} {debit.description} {date}</li>
+    }) 
+  }
   return (
     <div>
       <h1>Debits</h1>
+      <Link to="/">Return to Home</Link>
 
-      {/* {debitsView()}
+      {debitsView()}
 
       <form onSubmit={props.addDebit}>
-        <input type="text" name="description" />
-        <input type="number" name="amount" />
+        <input type="text" name="description" placeholder = 'Description' />
+        <input type="number" name="amount" placeholder = 'amount' step = '.01' />
         <button type="submit">Add Debit</button>
-      </form> */}
+      </form>
 
-      <Link to="/">Return to Home</Link>
+      <AccountBalance accountBalance={props.accountBalance}/>
     </div>
   )
 }

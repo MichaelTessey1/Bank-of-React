@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import AccountBalance from './AccountBalance';
 
 const Credits = (props) => {
-  let displayCredits = () =>{
+  let creditsView = () =>{
     const {credits} = props;
     return credits.map((credit) => {
         let date = credit.date.slice(0,10);
@@ -17,7 +17,7 @@ const Credits = (props) => {
       <h1>Credits</h1>
       <Link to="/">Return to Home</Link>
       
-      {displayCredits()}
+      {creditsView()}
 
       <form onSubmit={props.addCredit}>
         <input type = 'text' name = 'description' placeholder = 'Description' />
